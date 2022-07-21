@@ -9,7 +9,7 @@
         name: "../roles/facts"
 
 - name: build report with facts
-  hosts: ansible-1
+  hosts: backup-server
   gather_facts: no
 
   tasks:
