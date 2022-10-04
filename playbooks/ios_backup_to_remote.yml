@@ -21,4 +21,4 @@
         src: "{{config_output.backup_path}}"
         dest: "{{remote_uid}}@{{remote_host}}:{{backup_path}}{{inventory_hostname}}.config"
       become: true
-      delegate_to: "{{remote_host}}"        
+      delegate_to: localhost       
