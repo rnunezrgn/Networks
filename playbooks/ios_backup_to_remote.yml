@@ -16,7 +16,7 @@
         backup: yes
       register: config_output
 
-    - name: Move backup to remove storage
+    - name: Move backup to remote storage
       copy:
         src: "{{config_output.backup_path}}"
         dest: "{{remote_uid}}@{{remote_host}}:{{backup_path}}{{inventory_hostname}}.config"
