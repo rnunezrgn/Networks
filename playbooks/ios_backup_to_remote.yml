@@ -1,0 +1,24 @@
+---
+- name: Start Backup of ios Devices
+  hosts: all
+  connection: network_cli
+  become: yes
+  gather_facts: no
+  vars:
+    ansible_network_os: "ios"
+    backup_path: "/opt/backups/backup_ios/"
+    remote_uid: "netapp"
+    remote_host: "mystorage1.cc.domain.com"
+
+  tasks:
+    - name: Backup with register variable
+      ios_config:
+        backup: yes
+      register: config_output
+
+    - name: Move backup to remove storage
+      copy:
+        src: "{{config_output.backup_path}}"
+        dest: "{{remote_uid}}@{{remote_host}}:{{backup_path}}{{inventory_hostname}}.config"
+      become: true
+      delegate_to: "{{remote_host}}"        
